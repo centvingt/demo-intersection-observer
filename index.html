@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comment utiliser Intersection Obsserver</title>
+    <style>
+      :root {
+        --dark-color: #045;
+        --middle-color: #09f;
+        --light-color: #bef;
+      }
+      body {
+        background-color: var(--dark-color);
+        display: grid;
+        min-height: 100vh;
+        align-items: center;
+      }
+      .card-container {
+        display: grid;
+        gap: 16px;
+        max-width: 1024px;
+        margin: auto;
+        padding: 16px;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+          Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+          sans-serif;
+      }
+      h1 {
+        margin-bottom: 0;
+        text-align: center;
+        font-size: 48px;
+        color: var(--middle-color);
+      }
+      h2 {
+        font-size: 36px;
+      }
+      .card {
+        font-size: 20px;
+        background-color: var(--middle-color);
+        color: var(--dark-color);
+        border-radius: 36px;
+        padding: 16px;
+        transition: 0.5s;
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 16px;
+        text-decoration: none;
+        transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+      }
+      .card:hover {
+        transform: scale(1.05) rotate3d(0, 0, 4, -1deg);
+        box-shadow: 0px 2.76726px 2.21381px 0px rgba(0, 0, 0, 0.02),
+          0px 6.6501px 5.32008px 0px rgba(0, 68, 85, 0.03),
+          0px 12.52155px 10.01724px 0px rgba(0, 68, 85, 0.04),
+          0px 22.33631px 17.86905px 0px rgba(0, 68, 85, 0.04),
+          0px 41.77761px 33.42209px 0px rgba(0, 68, 85, 0.05),
+          0px 100px 80px 0px rgba(0, 68, 85, 0.07);
+      }
+      img {
+        width: 100%;
+        border-radius: 20px;
+      }
+      @media (max-width: 600px) {
+        .card {
+          grid-template-columns: 1fr 1fr;
+        }
+        h1 {
+          font-size: 36px;
+        }
+        h2 {
+          font-size: 32px;
+        }
+      }
+      /* color: #bef; */
+    </style>
+  </head>
+  <body>
+    <div class="card-container">
+      <h1>Intersection Observer</h1>
+      <a href="card-start.html" class="card">
+        <img alt="Page de départ" src="card-start.gif" target="_blank" />
+        <h2>Page de départ</h2>
+      </a>
+      <a href="card-end.html" class="card">
+        <img alt="Page d’arrivée" src="card-end.gif" target="_blank" />
+        <h2>Page d’arrivée</h2>
+      </a>
+      <a href="infinite-card.html" class="card">
+        <img alt="Défilement infini" src="infinite-card.gif" target="_blank" />
+        <h2>Défilement infini</h2>
+      </a>
+      <a href="infinite-img.html" class="card">
+        <img alt="Images infinies" src="infinite-img.gif" target="_blank" />
+        <h2>Images infinies</h2>
+      </a>
+    </div>
+  </body>
+</html>

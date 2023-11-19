@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comment utiliser Intersection Obsserver</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        background-color: #045;
+      }
+      .card-container {
+        display: grid;
+        gap: 16px;
+        overflow-x: hidden;
+      }
+      .card {
+        border-radius: 12px;
+        width: 100%;
+        object-fit: cover;
+        transform: translateX(100px);
+        opacity: 0;
+        transition: 0.5s;
+        height: 200px;
+      }
+      .card.show {
+        transform: none;
+        opacity: 1;
+      }
+
+      /* color: #bef; */
+    </style>
+  </head>
+  <body>
+    <div class="card-container">
+      <img
+        class="card"
+        alt="Image aléatoire"
+        src="https://source.unsplash.com/random/200x200?sig=1"
+      />
+      <img
+        class="card"
+        alt="Image aléatoire"
+        src="https://source.unsplash.com/random/200x200?sig=2"
+      />
+      <img
+        class="card"
+        alt="Image aléatoire"
+        src="https://source.unsplash.com/random/200x200?sig=3"
+      />
+      <img
+        class="card"
+        alt="Image aléatoire"
+        src="https://source.unsplash.com/random/200x200?sig=4"
+      />
+      <img
+        class="card"
+        alt="Image aléatoire"
+        src="https://source.unsplash.com/random/200x200?sig=5"
+      />
+      <img
+        class="card"
+        alt="Image aléatoire"
+        src="https://source.unsplash.com/random/200x200?sig=6"
+      />
+      <img
+        class="card"
+        alt="Image aléatoire"
+        src="https://source.unsplash.com/random/200x200?sig=7"
+      />
+      <img
+        class="card"
+        alt="Image aléatoire"
+        src="https://source.unsplash.com/random/200x200?sig=8"
+      />
+      <img
+        class="card"
+        alt="Image aléatoire"
+        src="https://source.unsplash.com/random/200x200?sig=9"
+      />
+      <img
+        class="card"
+        alt="Image aléatoire"
+        src="https://source.unsplash.com/random/200x200?sig=10"
+      />
+      <img
+        class="card"
+        alt="Image aléatoire"
+        src="https://source.unsplash.com/random/200x200?sig=11"
+      />
+      <img
+        class="card"
+        alt="Image aléatoire"
+        src="https://source.unsplash.com/random/200x200?sig=12"
+      />
+      <img
+        class="card"
+        alt="Image aléatoire"
+        src="https://source.unsplash.com/random/200x200?sig=13"
+      />
+      <img
+        class="card"
+        alt="Image aléatoire"
+        src="https://source.unsplash.com/random/200x200?sig=14"
+      />
+      <img
+        class="card"
+        alt="Image aléatoire"
+        src="https://source.unsplash.com/random/200x200?sig=15"
+      />
+    </div>
+    <script>
+      const cardContainer = document.querySelector('.card-container')
+      const cards = document.querySelectorAll('.card')
+      const getLastCard = () => document.querySelector('.card:last-child')
+
+      let i = 16
+
+      const getNewImg = () =>
+        `<img class="card" alt="Image aléatoire" src="https://source.unsplash.com/random/200x200?sig=${i++}" />`
+      const getNewSrc = () =>
+        `https://source.unsplash.com/random/200x200?sig=${i++}`
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            entry.target.classList.toggle(
+              'show',
+              entry.intersectionRatio >= 0.25
+            )
+            if (entry.target.classList.contains('show'))
+              observer.unobserve(entry.target)
+          })
+        },
+        { threshold: [0, 0.25, 1], rootMargin: '-10px 100px 0px' }
+      )
+      cards.forEach((card) => observer.observe(card))
+
+      const loadNewCard = () => {
+        const newCard = document.createElement('img')
+        newCard.src = getNewSrc()
+        newCard.alt = 'Image aléatoire'
+        newCard.classList.add('card')
+        cardContainer.append(newCard)
+        observer.observe(newCard)
+      }
+      const lastCardObserver = new IntersectionObserver((entries) => {
+        const lastCard = entries[0]
+        if (!lastCard.isIntersecting) return
+        for (let i = 0; i < 10; i++) loadNewCard()
+        lastCardObserver.unobserve(lastCard.target)
+        lastCardObserver.observe(getLastCard())
+      }, {})
+      lastCardObserver.observe(getLastCard())
+    </script>
+  </body>
+</html>
